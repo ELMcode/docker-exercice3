@@ -1,0 +1,21 @@
+version: '3.8'
+
+services:
+  # MySQL Servicee
+  db:
+    container_name: db-beers
+    build:
+      context: ./sql
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: beer
+
+  # API Flask Service
+  api:
+    container_name: api-beers
+    build:
+      context: ./api
+    ports:
+      - "80:5000"
+    depends_on:
+      - db
